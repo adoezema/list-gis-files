@@ -16,7 +16,14 @@ logging.basicConfig(level='INFO', format='%(asctime)s - %(message)s',
 log = logging.getLogger('rich')
 
 def run(arguments):
-    pass
+    log.info(arguments.path)
 
 if __name__ == "__main__":
-    run()
+    parser = argparse.ArgumentParser(description='List GIS Files in a directory')
+    parser.add_argument('-p', dest='path', metavar='path', type=str, help='Input directory')
+    args =  parser.parse_args()
+    try:
+        run(args)
+    except Exception as e:
+        log.critical("Exception detected, script exiting")
+        log.critical(e)
